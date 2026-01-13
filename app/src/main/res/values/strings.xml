@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">SimulacroIA</string>
+    <string name="listado">Listado</string>
+    <string name="tareas">Tareas</string>
+    <string name="nuevo">Nuevo</string>
+    <string name="atras">Atras</string>
+    <string name="insertar_usuario">Insertar</string>
+</resources>
