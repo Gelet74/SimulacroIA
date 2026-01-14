@@ -74,10 +74,11 @@ fun PantallaListaUsuarios(
                         onClick = { onUsuarioPulsado(usuario) }
                     )
             ) {
+                var numero=   usuario.tareas.count { !it.completada }
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(text = usuario.nombre)
                     Text(text = usuario.telefono)
-                    usuario.tareas.count { !it.completada }
+                    Text(text="Pendientes: $numero")
                     HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
                 }
             }

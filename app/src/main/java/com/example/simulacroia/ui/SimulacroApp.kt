@@ -1,5 +1,7 @@
 package com.example.simulacroia.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -27,6 +29,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.simulacroexamen.R
 import com.example.simulacroia.modelo.Usuario
+import com.example.simulacroia.ui.pantallas.PantallaInicio
+import com.example.simulacroia.ui.pantallas.PantallaNuevo
+import com.example.simulacroia.ui.pantallas.PantallaTareas
 
 enum class Pantallas(@StringRes val titulo: Int) {
     Listado(R.string.listado),
@@ -34,6 +39,7 @@ enum class Pantallas(@StringRes val titulo: Int) {
     Nuevo(R.string.nuevo)
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SimulacroApp(
     viewModel: UsuarioViewModel = viewModel(factory = UsuarioViewModel.Factory),
@@ -89,8 +95,8 @@ fun SimulacroApp(
             composable(Pantallas.Tareas.name) {
                 PantallaTareas(
                     usuario = viewModel.usuarioPulsado,
-                    onAnadirTarea = { texto: String, fecha: String ->
-                        viewModel.anadirTarea(texto, fecha)
+                    onAnadirTarea = { texto ->
+                        viewModel.anadirTarea(texto)
                     },
                     modifier = Modifier.fillMaxSize()
                 )

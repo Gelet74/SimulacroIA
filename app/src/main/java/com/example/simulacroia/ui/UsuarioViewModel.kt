@@ -1,5 +1,7 @@
 package com.example.simulacroia.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -9,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.navigation.NavBackStackEntry
 import com.example.simulacroia.SimulacroAplicacion
 import com.example.simulacroia.datos.UsuarioRepositorio
 import com.example.simulacroia.modelo.Tarea
@@ -44,7 +45,7 @@ class UsuarioViewModel(
         obtenerUsuarios()
     }
 
-    fun actualizarUsuarioPulsado(usuario: NavBackStackEntry) {
+    fun actualizarUsuarioPulsado(usuario: Usuario) {
         usuarioPulsado = usuario
     }
 
@@ -77,7 +78,9 @@ class UsuarioViewModel(
         }
     }
 
-    fun anadirTarea(texto: String, fecha: String) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun anadirTarea(texto: String) {
+        val fecha = obtenerFechaActual()
         viewModelScope.launch {
             try {
                 val nuevaTarea = usuarioPulsado.tareas + Tarea(
@@ -102,6 +105,12 @@ class UsuarioViewModel(
                 usuarioUIState = UsuarioUIState.Error
             }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun obtenerFechaActual() : String {
+        val hoy = java.time.LocalDate.now()
+        return hoy.toString()
     }
 
     companion object {
