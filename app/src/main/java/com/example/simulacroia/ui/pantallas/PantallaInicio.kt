@@ -2,6 +2,7 @@ package com.example.simulacroia.ui.pantallas
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -70,9 +71,9 @@ fun PantallaListaUsuarios(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 12.dp, vertical = 8.dp)
-                    .combinedClickable(
-                        onClick = { onUsuarioPulsado(usuario) }
-                    )
+                        .clickable(
+                            onClick = { onUsuarioPulsado(usuario) }
+                        )
             ) {
                 var numero=   usuario.tareas.count { !it.completada }
                 Column(modifier = Modifier.fillMaxWidth()) {
